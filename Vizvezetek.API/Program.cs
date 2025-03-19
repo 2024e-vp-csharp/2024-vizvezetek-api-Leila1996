@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Vizvezetek.API.Context;
+
 namespace Vizvezetek.API
 {
     public class Program
@@ -9,6 +12,12 @@ namespace Vizvezetek.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+
+            // Adatbázis kapcsolat beállítása
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<VizvezetekDbContext>(options =>
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             var app = builder.Build();
 
