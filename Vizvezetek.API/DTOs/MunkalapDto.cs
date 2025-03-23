@@ -4,24 +4,23 @@ namespace Vizvezetek.API.DTOs
 {
     public class MunkalapDto
     {
-        public int Id { get; set; }
-        public DateTime BeadasDatum { get; set; }
-        public DateTime JavitasDatum { get; set; }
-        public string Helyszin { get; set; }
-        public string Szerelo { get; set; }
-        public int Munkaora { get; set; }
-        public int Anyagar { get; set; }
+        public int id { get; set; }
+        public DateTime beadas_datum { get; set; }
+        public DateTime javitas_datum { get; set; }
+        public string helyszin { get; set; } // Település + utca egy mezőben
+        public string szerelo { get; set; } // Szerelő neve egy mezőben
+        public int munkaora { get; set; }
+        public int anyagar { get; set; }
 
-        // Konstruktor, amely tartalmazza az id-t és a többi mezőt
-        public MunkalapDto(int id, DateTime beadasDatum, DateTime javitasDatum, string telepules, string utca, string szerelo, int munkaora, int anyagar)
+        public MunkalapDto(int id, DateTime beadas_datum, DateTime javitas_datum, string helyszin, string szerelo, int munkaora, int anyagar)
         {
-            Id = id;
-            BeadasDatum = beadasDatum;
-            JavitasDatum = javitasDatum;
-            Helyszin = $"{telepules}, {utca}";
-            Szerelo = szerelo;
-            Munkaora = munkaora;
-            Anyagar = anyagar;
+            this.id = id;
+            this.beadas_datum = beadas_datum;
+            this.javitas_datum = javitas_datum;
+            this.helyszin = helyszin;
+            this.szerelo = szerelo;
+            this.munkaora = munkaora;
+            this.anyagar = anyagar;
         }
 
         public MunkalapDto(object id, object beadas_datum, object javitas_datum, string v, object nev, object munkaora, object anyagar)

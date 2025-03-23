@@ -21,6 +21,6 @@ public partial class Hely
     [StringLength(75)]
     public string utca { get; set; } = null!;
 
-    [InverseProperty("hely")]
-    public virtual ICollection<Munkalap> munkalap { get; set; } = new List<Munkalap>();
+    [InverseProperty(nameof(Munkalap.hely))] // Megfelelően hivatkozik a Munkalap osztályban lévő hely tulajdonságra
+    public virtual ICollection<Munkalap> Munkalapok { get; set; } = new List<Munkalap>();
 }

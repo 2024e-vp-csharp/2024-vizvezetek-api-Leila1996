@@ -10,9 +10,22 @@ namespace Vizvezetek.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null; // Kisbetûs JSON mezõnevek
+                });
 
-            builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+
+            // CORS engedélyezése (ha frontend is van)
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy => policy.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader());
+            });
 
             // Adatbázis kapcsolat beállítása
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -21,10 +34,17 @@ namespace Vizvezetek.API
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Adatbázis migráció automatikus futtatása
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<VizvezetekDbContext>();
+                dbContext.Database.Migrate(); // Frissíti az adatbázist, ha szükséges
+            }
+
+
+            app.UseCors("AllowAll"); // CORS engedélyezése
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -15,7 +15,7 @@ namespace Vizvezetek.API.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Munkalap>()
-                .ToTable("munkalapok"); // Ha az adatbázisban ez a táblanév
+                .ToTable("munkalap"); // Ha az adatbázisban ez a táblanév
 
             base.OnModelCreating(modelBuilder);
         }

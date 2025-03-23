@@ -34,10 +34,10 @@ public partial class Munkalap
     public int anyagar { get; set; }
 
     [ForeignKey(nameof(hely_id))]
-    [InverseProperty("munkalapok")]
+    [InverseProperty(nameof(Hely.Munkalapok))] // A megfelelő névnek kell lennie
     public virtual Hely hely { get; set; } = null!;
 
     [ForeignKey(nameof(szerelo_id))]
-    [InverseProperty("munkalapok")]
+    [InverseProperty(nameof(Szerelo.munkalap))]
     public virtual Szerelo szerelo { get; set; } = null!;
 }
